@@ -1,0 +1,18 @@
+astroid==2.11.2
+certifi==2021.10.8
+charset-normalizer==2.0.12
+dill==0.3.4
+idna==3.3
+iqoptionapi @ https://github.com/iqoptionapi/iqoptionapi/archive/refs/heads/master.zip
+isort==5.10.1
+lazy-object-proxy==1.7.1
+mccabe==0.7.0
+platformdirs==2.5.1
+pylint==2.13.4
+requests==2.27.1
+six==1.16.0
+tomli==2.0.1
+typing-extensions==4.1.1
+urllib3==1.26.9
+websocket-client==0.56.0
+wrapt==1.14.0
