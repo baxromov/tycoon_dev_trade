@@ -13,7 +13,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="tycoon-dev-trade",
-    version='0.0.1',
+    version='0.0.1.1',
     author="Baxromov",
     description="Don't use it in a real account.",
     classifiers=[

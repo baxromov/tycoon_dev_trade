@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: tycoon-dev-trade
+Version: 0.0.1.1
+Summary: Don't use it in a real account.
+Home-page: UNKNOWN
+Author: Baxromov
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+Don't use it in a real account.
+
