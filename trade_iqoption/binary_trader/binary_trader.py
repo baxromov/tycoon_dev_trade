@@ -109,7 +109,7 @@ class BinaryTrader(IQ_Option):
             Продажа
         """
         logging.info('Продажа')
-        check, id = self.buy(price, ACTION=ACTIONS[CALL], expirations=self.expiration)
+        check, id = super().buy(price, ACTIVES=self.active, ACTION=ACTIONS[CALL], expirations=self.expiration)
         return id
 
     def check_win(self, id_order: Optional[int]) -> Optional[float]:
