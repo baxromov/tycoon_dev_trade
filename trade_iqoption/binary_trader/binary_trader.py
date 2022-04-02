@@ -151,6 +151,7 @@ class BinaryTrader(IQ_Option):
                     print(flag, price)
                     if flag:
                         profit.append(win)
+                        time.sleep(5)
                         return profit
                     order_id = active(price)
                     win = self.check_win(order_id)
@@ -158,6 +159,7 @@ class BinaryTrader(IQ_Option):
                     print(win)
                     profit.append(win)
                     if win > 0:
+                        time.sleep(5)
                         logging.info('Выигрыш(Мартингейл)')
                         return profit
 
