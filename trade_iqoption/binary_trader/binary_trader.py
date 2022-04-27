@@ -98,7 +98,7 @@ class BinaryTrader(IQ_Option):
             Покупка
         """
         logging.info('Покупка')
-        ACTION = ACTIONS[PUT]
+        ACTION = ACTIONS[CALL]
         ACTIVES = self.active
         expirations = self.expiration
         check, id = super().buy(price, ACTIVES, ACTION, expirations)
@@ -109,7 +109,7 @@ class BinaryTrader(IQ_Option):
             Продажа
         """
         logging.info('Продажа')
-        check, id = super().buy(price, ACTIVES=self.active, ACTION=ACTIONS[CALL], expirations=self.expiration)
+        check, id = super().buy(price, ACTIVES=self.active, ACTION=ACTIONS[PUT], expirations=self.expiration)
         return id
 
     def check_win(self, id_order: Optional[int]) -> Optional[float]:
@@ -131,15 +131,18 @@ class BinaryTrader(IQ_Option):
         except IndexError:
             return True, None
 
-    def martingale_strategy(self, win: Optional[float], active: Optional[Callable]) -> Optional[List[float]]:
+    def martingale_strategy(self, win: Optional[float], active: Optional[Callable], timeout: Optional[int]) -> Optional[
+        List[float]]:
         """
             Мартингейл
+            timeout - время ожидания после покупки (s)
         """
         logging.info('Мартингейл')
         profit = [0]
         if win > 0:
             logging.info('Выигрыш(Мартингейл)')
             profit.append(win)
+            time.sleep(timeout * 60)
             return profit
         else:
             logging.info('Проигрыш(Мартингейл)')
@@ -151,7 +154,7 @@ class BinaryTrader(IQ_Option):
                     print(flag, price)
                     if flag:
                         profit.append(win)
-                        time.sleep(5)
+                        time.sleep(timeout * 60)
                         return profit
                     order_id = active(price)
                     win = self.check_win(order_id)
@@ -159,7 +162,7 @@ class BinaryTrader(IQ_Option):
                     print(win)
                     profit.append(win)
                     if win > 0:
-                        time.sleep(5)
+                        time.sleep(timeout * 60)
                         logging.info('Выигрыш(Мартингейл)')
                         return profit
 
