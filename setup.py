@@ -8,7 +8,7 @@ README = (HERE / "README.md").read_text()
 
 setup(
     name="tycoon-dev-trade",
-    version='0.0.7',
+    version='0.0.8',
     author="Baxromov",
     description="Don't use it in a real account.",
     classifiers=[
