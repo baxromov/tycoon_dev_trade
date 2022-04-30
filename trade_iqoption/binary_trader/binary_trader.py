@@ -80,17 +80,8 @@ class BinaryTrader(IQ_Option):
         Проверка на все кандалы красные или зеленые
         """
         logging.info('Проверка на все кандалы красные или зеленые')
-        green = data[:-1].count(1)
-        red = data[:-1].count(0)
-        if green == len(data[:-1]):
-            logging.info('Все кандалы зеленые')
-            return True
-        elif red == len(data[:-1]):
-            logging.info('Все кандалы красные')
-            return False
-        else:
-            logging.info('Не все кандалы красные или зеленые')
-            return None
+        return -1 * (0 in data[:-1] and 1 in data[:-1]) | False * (0 in data[:-1]) | True * (
+                1 in data[:-1])
 
     def buy(self, price: Optional[float], ACTIVES: Optional[str] = None, ACTION: Optional[str] = None,
             expirations: Optional[int] = 0) -> Optional[int]:
