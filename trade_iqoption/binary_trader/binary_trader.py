@@ -174,3 +174,36 @@ class BinaryTrader(IQ_Option):
         logging.info('Стоп лосс')
         data = self.amount_list
         return sum(data) / 3
+
+    def start(self, sleep_time: Optional[int] = 1, profit_percent: Optional[float] = 1):
+        """
+            Запуск программы
+        :param sleep_time:
+        :param profit_percent:
+        :return:
+        """
+        price = self.amount_list[0]
+        balance = self.get_balance()
+        while True:
+            candles = self.get_candles()
+            color = self.get_color(candles)
+            print(color)
+            if self.is_all_candles_red_or_green(color) == 1:
+                win = self.sell(price)
+                check_win = self.check_win(win)
+                self.martingale_strategy(check_win, self.sell, sleep_time)
+            elif self.is_all_candles_red_or_green(color) == 0:
+                win = self.buy(price)
+                check_win = self.check_win(win)
+                self.martingale_strategy(check_win, self.buy, sleep_time)
+            else:
+                continue
+            if (balance * profit_percent) / 100 < 1:
+                raise Exception('У вас должно быть более 1 доллара или более 1% прибыли')
+            new_balance = self.get_balance()
+            profit = new_balance - balance
+
+            if profit > (balance * profit_percent) / 100:
+                break
+            elif profit < -1 * ((balance * profit_percent) / 100):
+                break
